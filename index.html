@@ -1,303 +1,206 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Worker Hive — Building the platforms that enable the next generation of business software.">
-  <title>Worker Hive</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WorkerHive — Making companies AI-native</title>
+<meta name="description" content="WorkerHive helps established, non-tech companies turn manual, repetitive work into AI workflows that run in production, with measurable savings.">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fbfaf7;
+    --surface: #ffffff;
+    --text: #1a1d23;
+    --muted: #5b6270;
+    --line: #e6e3dc;
+    --accent: #F5A623;
+    --accent-dark: #a86d00;
+    --ink: #0E2238;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+  header { padding: 28px 0; }
+  .logo { display: inline-flex; align-items: center; font-weight: 700; font-size: 20px; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
+  .logo img { width: 36px; height: 36px; margin-right: 10px; }
+  .logo span { color: var(--accent); }
+
+  .hero { padding-top: 72px; padding-bottom: 88px; }
+  .hero h1 {
+    font-size: clamp(34px, 5.5vw, 56px);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    color: var(--ink);
+    max-width: 760px;
+  }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero p {
+    margin-top: 24px;
+    font-size: clamp(17px, 2vw, 20px);
+    color: var(--muted);
+    max-width: 620px;
+  }
+  .btn {
+    display: inline-block;
+    margin-top: 36px;
+    padding: 14px 26px;
+    background: var(--ink);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: background .2s;
+  }
+  .btn:hover { background: var(--accent-dark); }
+
+  section { padding: 72px 0; border-top: 1px solid var(--line); }
+  .label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--accent-dark);
+    margin-bottom: 28px;
+  }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .step {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 28px;
+  }
+  .step .n { font-size: 14px; font-weight: 600; color: var(--accent-dark); }
+  .step h3 { font-size: 20px; margin: 8px 0 10px; color: var(--ink); letter-spacing: -0.01em; }
+  .step p { color: var(--muted); font-size: 15px; }
+
+  .areas { display: flex; flex-wrap: wrap; gap: 10px; }
+  .areas span {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 15px;
+  }
+
+  .founder { display: grid; grid-template-columns: 1fr 1.6fr; gap: 40px; align-items: start; }
+  .founder h2 { font-size: 26px; color: var(--ink); letter-spacing: -0.02em; line-height: 1.25; }
+  .founder h2 small { display: block; font-size: 15px; font-weight: 500; color: var(--muted); margin-top: 6px; letter-spacing: 0; }
+  .founder h2 small a { color: var(--ink); }
+  .founder ul { list-style: none; }
+  .founder li { padding: 10px 0 10px 22px; position: relative; color: var(--text); border-bottom: 1px solid var(--line); }
+  .founder li:last-child { border-bottom: none; }
+  .founder li::before { content: ""; position: absolute; left: 0; top: 19px; width: 8px; height: 8px; border-radius: 2px; background: var(--accent); }
+
+  .cta { text-align: center; }
+  .cta h2 { font-size: clamp(26px, 3.5vw, 36px); color: var(--ink); letter-spacing: -0.02em; line-height: 1.2; }
+  .cta p { color: var(--muted); margin-top: 12px; }
+  .cta .mail { display: block; margin-top: 18px; color: var(--muted); font-size: 15px; }
+  .cta .mail a { color: var(--ink); }
+
+  footer { padding: 32px 0 40px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  footer a { color: var(--muted); }
+
+  @media (max-width: 760px) {
+    .wrap { padding: 0 16px; }
+    .hero { padding-top: 40px; padding-bottom: 56px; }
+    section { padding: 52px 0; }
+    .steps { grid-template-columns: 1fr; }
+    .founder { grid-template-columns: 1fr; gap: 20px; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- ── Hero ─────────────────────────────────────────────────────────────── -->
-  <section class="hero">
-    <canvas id="network-canvas"></canvas>
-    <div class="hero-content">
-      <div class="hero-logo">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
-          <polygon points="50,10 85,30 85,70 50,90 15,70 15,30" fill="#E87C2B"/>
-          <ellipse cx="32" cy="47" rx="13" ry="7" fill="rgba(255,255,255,0.72)" transform="rotate(-20 32 47)"/>
-          <ellipse cx="68" cy="47" rx="13" ry="7" fill="rgba(255,255,255,0.72)" transform="rotate(20 68 47)"/>
-          <ellipse cx="50" cy="62" rx="7" ry="13" fill="rgba(255,255,255,0.92)"/>
-          <circle cx="50" cy="42" r="6" fill="rgba(255,255,255,0.92)"/>
-        </svg>
-      </div>
-      <p class="hero-eyebrow">Technology Company</p>
-      <h1>Worker Hive</h1>
-      <p class="motto">We are building the platforms that enable the next generation of business software.</p>
-      <p class="hero-sub">Worker-Hive is a technology company focused on developing foundational platforms that enable organizations, creators, and businesses to build advanced digital solutions that solve real-world challenges.</p>
-      <div class="hero-ctas">
-        <a href="#bizagents" class="btn-primary">Explore BizAgents</a>
-        <a href="#contact" class="btn-secondary">Contact Us</a>
-      </div>
-    </div>
-  </section>
+<header>
+  <div class="wrap">
+    <a class="logo" href="/"><img src="logo.svg" alt="">Worker<span>Hive</span></a>
+  </div>
+</header>
 
-  <!-- ── Who We Are ───────────────────────────────────────────────────────── -->
-  <section class="who-we-are" id="who-we-are">
-    <div class="container">
-      <p class="section-label">Who We Are</p>
-      <h2>Building the Foundation for the Next Generation of Intelligent Business Solutions</h2>
-      <p class="section-intro">Our mission is to accelerate industry innovation by making state-of-the-art technologies accessible, practical, and affordable. We believe that organizations of every size should be able to benefit from modern cloud infrastructure, intelligent automation, autonomous systems, and advanced data technologies without the complexity and cost traditionally associated with enterprise software.</p>
-      <div class="cards">
-        <div class="card">
-          <div class="card-icon">▲</div>
-          <h3>Platform Technologies</h3>
-          <p>Foundational infrastructure and building blocks that enable the creation of intelligent, scalable, and data-driven business products.</p>
+<main>
+  <div class="wrap hero">
+    <h1>Making companies <em>AI-native</em>: from diagnosis to production.</h1>
+    <p>Most companies already "use AI." Few see it in their numbers. We help established, non-tech companies turn manual, repetitive work into AI workflows that run in production, and we measure the savings.</p>
+    <a class="btn" href="mailto:contact@worker-hive.com?subject=Intro%20call">Book an intro call</a>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <div class="label">How we work</div>
+      <div class="steps">
+        <div class="step">
+          <div class="n">01</div>
+          <h3>Diagnose</h3>
+          <p>Map where time and money are lost, and rank AI opportunities by ROI.</p>
         </div>
-        <div class="card">
-          <div class="card-icon">◆</div>
-          <h3>Industry Solutions</h3>
-          <p>Real-world products built on our platforms that deliver measurable value to specific industries and business sectors.</p>
+        <div class="step">
+          <div class="n">02</div>
+          <h3>Build</h3>
+          <p>Design, integrate with your existing systems (ERP, CRM, core systems) and deploy to production.</p>
         </div>
-        <div class="card">
-          <div class="card-icon">●</div>
-          <h3>Innovation Ecosystem</h3>
-          <p>A marketplace vision where solution creators can design, deploy, and monetize products on shared foundational infrastructure.</p>
+        <div class="step">
+          <div class="n">03</div>
+          <h3>Measure &amp; improve</h3>
+          <p>Every workflow is tracked against a KPI agreed upfront, and improved over time.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── Vision & Mission ─────────────────────────────────────────────────── -->
-  <section class="mission" id="mission">
-    <div class="container">
-      <p class="section-label">Our Vision</p>
-      <h2>Advanced Technology for Every Organization</h2>
-      <blockquote>Advanced technology should not be accessible only to the largest enterprises with extensive resources.</blockquote>
-      <div class="mission-body">
-        <p>We envision a future where advanced technology is no longer reserved for large enterprises with extensive resources. Worker-Hive is building the technological foundations that enable businesses, innovators, and solution creators to rapidly develop intelligent products capable of addressing real-world operational challenges.</p>
-        <p>By combining modern cloud technologies, intelligent automation, advanced data systems, and autonomous software capabilities, we seek to create an ecosystem where innovation can move faster, cost less, and generate measurable impact.</p>
-        <div class="mission-values">
-          <div class="value-item">
-            <span class="value-label">Affordability</span>
-            <p>Enterprise-grade capabilities without enterprise-scale costs.</p>
-          </div>
-          <div class="value-item">
-            <span class="value-label">Accessibility</span>
-            <p>Practical and usable for organizations of every size.</p>
-          </div>
-          <div class="value-item">
-            <span class="value-label">Innovation</span>
-            <p>Infrastructure that accelerates, not slows, time-to-market.</p>
-          </div>
-          <div class="value-item">
-            <span class="value-label">Impact</span>
-            <p>Measurable progress across industries and society.</p>
-          </div>
-        </div>
+  <section>
+    <div class="wrap">
+      <div class="label">Typical areas</div>
+      <div class="areas">
+        <span>Customer service &amp; call centers</span>
+        <span>Claims &amp; policies</span>
+        <span>Orders &amp; bookings</span>
+        <span>Document-heavy operations</span>
+        <span>Back office &amp; finance</span>
+        <span>Procurement</span>
       </div>
     </div>
   </section>
 
-  <!-- ── Our Approach ──────────────────────────────────────────────────────── -->
-  <section class="approach" id="approach">
-    <div class="container">
-      <p class="section-label">Our Approach</p>
-      <h2>Two Complementary Pillars</h2>
-      <div class="pillars">
-        <div class="pillar">
-          <div class="pillar-number">01</div>
-          <h3>Platform Development</h3>
-          <p>We build foundational technologies and infrastructure that enable the creation of intelligent business solutions. These platforms provide the building blocks required to develop scalable, secure, and data-driven products without the need to reinvent complex infrastructure.</p>
-        </div>
-        <div class="pillar">
-          <div class="pillar-number">02</div>
-          <h3>Solution Development</h3>
-          <p>We actively create and showcase industry-focused products built on top of our own platforms. These products deliver meaningful value to specific industries while demonstrating the capabilities and potential of the underlying Worker-Hive technology ecosystem.</p>
-        </div>
-      </div>
-      <p class="approach-closing">This approach allows us to continuously validate our platforms while driving practical innovation in real-world environments.</p>
+  <section>
+    <div class="wrap founder">
+      <h2>Dr. Or Wertheim<small>Founder, WorkerHive · <a href="https://www.linkedin.com/in/or-wertheim/" target="_blank" rel="noopener">LinkedIn</a></small></h2>
+      <ul>
+        <li>PhD in Computer Science and AI (autonomous agents), Ben-Gurion University. Peer-reviewed work in IEEE RA-L, AAAI and AI Magazine.</li>
+        <li>15+ years across research and industry. Built and led a 17-person AI team at a global company and delivered a critical program on schedule.</li>
+        <li>Former IDF combat officer. I own the outcome, not just the advice.</li>
+      </ul>
     </div>
   </section>
 
-  <!-- ── BizAgents ─────────────────────────────────────────────────────────── -->
-  <section class="bizagents" id="bizagents">
-    <div class="container">
-      <span class="flagship-badge">Flagship Platform</span>
-      <h2>BizAgents</h2>
-      <p class="section-intro">BizAgents is Worker-Hive's primary platform initiative and the focus of our current development efforts. Designed to enable the creation, deployment, operation, and commercialization of intelligent business solutions built on top of a unified cloud-native platform.</p>
-
-      <!-- Architecture diagram -->
-      <div class="arch-diagram">
-        <div class="arch-row top">
-          <div class="arch-node company">Worker Hive</div>
-        </div>
-        <div class="arch-arrow-down">↓</div>
-        <div class="arch-row">
-          <div class="arch-node platform">BizAgents Platform</div>
-        </div>
-        <div class="arch-arrow-down">↓</div>
-        <div class="arch-row">
-          <div class="arch-node builder">BizAgent Builder</div>
-        </div>
-        <div class="arch-arrow-down">↓</div>
-        <div class="arch-row split">
-          <div class="arch-node leaf">Public Products</div>
-          <div class="arch-divider">|</div>
-          <div class="arch-node leaf">Private Products</div>
-        </div>
-        <div class="arch-arrow-down">↓</div>
-        <div class="arch-row split">
-          <div class="arch-node showcase-node">Waiter Copilot</div>
-          <div class="arch-node future-node">Future Products</div>
-          <div class="arch-node future-node">Marketplace</div>
-        </div>
-      </div>
-
-      <!-- Capabilities -->
-      <h3 class="subsection-title">Core Platform Capabilities</h3>
-      <div class="capabilities">
-        <div class="capability-item">Managed databases</div>
-        <div class="capability-item">Blob and document storage</div>
-        <div class="capability-item">Vector search infrastructure</div>
-        <div class="capability-item">Knowledge management</div>
-        <div class="capability-item">Large Language Model integrations</div>
-        <div class="capability-item">Autonomous agent orchestration</div>
-        <div class="capability-item">Security and access control</div>
-        <div class="capability-item">Monitoring and observability</div>
-        <div class="capability-item">Multi-tenant deployment</div>
-        <div class="capability-item">Scalable cloud infrastructure</div>
-      </div>
-
-      <!-- BizAgent Builder -->
-      <div class="builder-section">
-        <h3 class="subsection-title">BizAgent Builder — Build Business Solutions, Not Infrastructure</h3>
-        <p>BizAgent Builder enables creators and organizations to develop customized products tailored to specific business needs. Rather than spending resources building infrastructure, teams can focus on solving business problems.</p>
-        <div class="product-types">
-          <div class="product-type">
-            <h4>Public Products</h4>
-            <p>Can be adopted by multiple organizations while maintaining complete customer data separation.</p>
-            <ul>
-              <li>Shared product definitions</li>
-              <li>Independent customer environments</li>
-              <li>Automated deployment</li>
-              <li>Revenue sharing for creators</li>
-            </ul>
-          </div>
-          <div class="product-type">
-            <h4>Private Products</h4>
-            <p>Built exclusively for a specific customer or organization.</p>
-            <ul>
-              <li>Organization-specific customization</li>
-              <li>Dedicated business workflows</li>
-              <li>Private knowledge environments</li>
-              <li>Exclusive deployment and access</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Intelligent Agents -->
-      <div class="agents-section">
-        <h3 class="subsection-title">Intelligent Agents as a Platform Capability</h3>
-        <p>BizAgents provides a framework for incorporating autonomous AI-powered agents directly into business products. Rather than existing as standalone tools, agents become integrated components within complete business solutions.</p>
-        <div class="agent-capabilities">
-          <div class="agent-cap">Assist users</div>
-          <div class="agent-cap">Analyze business information</div>
-          <div class="agent-cap">Coordinate workflows</div>
-          <div class="agent-cap">Interact with enterprise systems</div>
-          <div class="agent-cap">Generate insights</div>
-          <div class="agent-cap">Execute business processes</div>
-        </div>
-      </div>
+  <section class="cta">
+    <div class="wrap">
+      <h2>AI on your agenda, but not yet in your numbers?</h2>
+      <p>A 45-minute conversation to see if there's a fit.</p>
+      <a class="btn" href="mailto:contact@worker-hive.com?subject=Intro%20call">Let's talk</a>
+      <span class="mail">or write to <a href="mailto:contact@worker-hive.com">contact@worker-hive.com</a></span>
     </div>
   </section>
+</main>
 
-  <!-- ── Ecosystem ─────────────────────────────────────────────────────────── -->
-  <section class="ecosystem" id="ecosystem">
-    <div class="container">
-      <p class="section-label">The Platform Model</p>
-      <h2>The BizAgents Ecosystem</h2>
-      <p class="section-intro">One of the long-term objectives of BizAgents is the creation of an ecosystem where solution creators can design products and make them available to organizations worldwide. Worker-Hive manages the underlying platform infrastructure while creators focus on delivering business value.</p>
+<footer>
+  <div class="wrap">
+    <span>© 2026 WorkerHive</span>
+    <a href="https://www.linkedin.com/company/worker-hive/" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</footer>
 
-      <div class="ecosystem-flow">
-        <div class="flow-step">Creator</div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-step">Build Product</div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-step">Deploy via BizAgents</div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-step">Customers</div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-step">Revenue Sharing</div>
-      </div>
-
-      <div class="ecosystem-benefits">
-        <div class="eco-benefit">
-          <strong>Faster innovation</strong>
-          <p>Creators ship solutions without rebuilding infrastructure from scratch.</p>
-        </div>
-        <div class="eco-benefit">
-          <strong>Lower barriers to entry</strong>
-          <p>Advanced capabilities are accessible to small teams and individual innovators.</p>
-        </div>
-        <div class="eco-benefit">
-          <strong>Sustainable monetization</strong>
-          <p>Creators earn revenue share while Worker-Hive maintains the platform.</p>
-        </div>
-        <div class="eco-benefit">
-          <strong>Broader access</strong>
-          <p>Organizations worldwide gain access to specialized solutions built on proven foundations.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Waiter Copilot ────────────────────────────────────────────────────── -->
-  <section class="showcase" id="showcase">
-    <div class="container">
-      <p class="section-label">Showcase Solution</p>
-      <h2>Waiter Copilot</h2>
-      <div class="showcase-card">
-        <p class="showcase-tag">First Product on BizAgents</p>
-        <p>Waiter Copilot is the first public showcase product being developed on top of the BizAgents platform. Designed for the restaurant industry, Waiter Copilot demonstrates how intelligent business solutions can leverage modern infrastructure, advanced data capabilities, and autonomous agents to improve operational efficiency and decision-making.</p>
-        <p>As the first product in the BizAgents ecosystem, Waiter Copilot serves as a practical example of the platform's capabilities and future potential.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Looking Forward ──────────────────────────────────────────────────── -->
-  <section class="looking-forward" id="looking-forward">
-    <div class="container">
-      <h2>Looking Forward</h2>
-      <p>Worker-Hive is committed to developing technologies that create measurable value across industries. While BizAgents represents our primary focus today, it is only the first step toward a broader vision of enabling intelligent digital solutions that improve business outcomes, empower innovation, and contribute to meaningful societal progress.</p>
-      <p class="forward-closing">We are building foundations today for the products, businesses, and innovations of tomorrow.</p>
-    </div>
-  </section>
-
-  <!-- ── Contact ──────────────────────────────────────────────────────────── -->
-  <section class="contact" id="contact">
-    <div class="container">
-      <p class="section-label">Contact</p>
-      <h2>Get In Touch</h2>
-      <p class="contact-intro">Whether you're exploring BizAgents, looking to partner, or want to learn more about what we're building, we'd love to hear from you.</p>
-      <a href="mailto:contact@worker-hive.com" class="contact-email">contact@worker-hive.com</a>
-    </div>
-  </section>
-
-  <!-- ── Footer ───────────────────────────────────────────────────────────── -->
-  <footer>
-    <div class="container">
-      <div class="footer-brand">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
-          <polygon points="50,10 85,30 85,70 50,90 15,70 15,30" fill="#E87C2B"/>
-          <ellipse cx="32" cy="47" rx="13" ry="7" fill="rgba(255,255,255,0.72)" transform="rotate(-20 32 47)"/>
-          <ellipse cx="68" cy="47" rx="13" ry="7" fill="rgba(255,255,255,0.72)" transform="rotate(20 68 47)"/>
-          <ellipse cx="50" cy="62" rx="7" ry="13" fill="rgba(255,255,255,0.92)"/>
-          <circle cx="50" cy="42" r="6" fill="rgba(255,255,255,0.92)"/>
-        </svg>
-        <span>Worker Hive</span>
-      </div>
-      <p class="footer-tagline">We are building the platforms that enable the next generation of business software.</p>
-      <p class="footer-copy">&copy; 2026 Worker Hive. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script src="network.js"></script>
 </body>
 </html>
